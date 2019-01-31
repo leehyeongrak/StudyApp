@@ -7,5 +7,7 @@ target 'StudyApp' do
 
   # Pods for StudyApp
   pod 'Firebase/Core'  
+  pod 'Firebase/Auth'
+  pod 'Firebase/Database'
 
 end
