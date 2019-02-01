@@ -14,23 +14,26 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        
         checkUserIsLoggedIn()
+        
     }
     
     func checkUserIsLoggedIn() {
-        print("checkUserInLoggedIn")
         if Auth.auth().currentUser?.uid == nil {
             perform(#selector(presentLoginViewController), with: nil, afterDelay: 0)
         }
-        
     }
         
-    @objc func presentLoginViewController() {
-        print("presentLoginViewController")
-        performSegue(withIdentifier: "showLoginViewController", sender: self)
-    }
+    
 
 
 }
 
+extension UIViewController {
+    @objc func presentLoginViewController() {
+        if let loginViewController = self.storyboard?.instantiateViewController(withIdentifier: "loginViewController") {
+            let navigationController = UINavigationController(rootViewController: loginViewController)
+            present(navigationController, animated: true, completion: nil)
+        }
+    }
+}

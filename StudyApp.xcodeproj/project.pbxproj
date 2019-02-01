@@ -15,6 +15,8 @@
 		3950C13B2202C06C000228C4 /* GroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3950C13A2202C06C000228C4 /* GroupViewController.swift */; };
 		3950C13F2202CFBE000228C4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3950C13E2202CFBE000228C4 /* GoogleService-Info.plist */; };
 		3950C1412202D271000228C4 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3950C1402202D271000228C4 /* LoginViewController.swift */; };
+		39AC658C22043F51003F06D0 /* MoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39AC658B22043F51003F06D0 /* MoreViewController.swift */; };
+		39AC658E22046482003F06D0 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39AC658D22046482003F06D0 /* User.swift */; };
 		39D36D0B2202E1D600A17330 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39D36D0A2202E1D600A17330 /* SignUpViewController.swift */; };
 		7031C1B551E5F5F5DBECDF2B /* Pods_StudyApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EFB294E7A6FC5B89E95AA0F1 /* Pods_StudyApp.framework */; };
 /* End PBXBuildFile section */
@@ -30,6 +32,8 @@
 		3950C13A2202C06C000228C4 /* GroupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupViewController.swift; sourceTree = "<group>"; };
 		3950C13E2202CFBE000228C4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3950C1402202D271000228C4 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		39AC658B22043F51003F06D0 /* MoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreViewController.swift; sourceTree = "<group>"; };
+		39AC658D22046482003F06D0 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		39D36D0A2202E1D600A17330 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		7B24E1613201B78E31E5D7E9 /* Pods-StudyApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StudyApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-StudyApp/Pods-StudyApp.debug.xcconfig"; sourceTree = "<group>"; };
 		AB18767A1D0A0018493ED010 /* Pods-StudyApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StudyApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-StudyApp/Pods-StudyApp.release.xcconfig"; sourceTree = "<group>"; };
@@ -103,6 +107,7 @@
 			children = (
 				3950C12A2202B851000228C4 /* ViewController.swift */,
 				3950C13A2202C06C000228C4 /* GroupViewController.swift */,
+				39AC658B22043F51003F06D0 /* MoreViewController.swift */,
 				39D36D0A2202E1D600A17330 /* SignUpViewController.swift */,
 				3950C1402202D271000228C4 /* LoginViewController.swift */,
 			);
@@ -112,6 +117,7 @@
 		3950C13D2202C0E6000228C4 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				39AC658D22046482003F06D0 /* User.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -246,8 +252,10 @@
 				3950C1412202D271000228C4 /* LoginViewController.swift in Sources */,
 				3950C13B2202C06C000228C4 /* GroupViewController.swift in Sources */,
 				3950C12B2202B851000228C4 /* ViewController.swift in Sources */,
+				39AC658C22043F51003F06D0 /* MoreViewController.swift in Sources */,
 				3950C1292202B851000228C4 /* AppDelegate.swift in Sources */,
 				39D36D0B2202E1D600A17330 /* SignUpViewController.swift in Sources */,
+				39AC658E22046482003F06D0 /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

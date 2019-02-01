@@ -13,7 +13,7 @@
         <!--Login View Controller-->
         <scene sceneID="eRQ-f3-Fuj">
             <objects>
-                <viewController id="rYj-vx-7yj" customClass="LoginViewController" customModule="StudyApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="loginViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="rYj-vx-7yj" customClass="LoginViewController" customModule="StudyApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="2Ov-cS-8m5">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -42,7 +42,7 @@
                                                 <state key="normal" title="SignUp"/>
                                                 <connections>
                                                     <action selector="tappedSignUpButton:" destination="rYj-vx-7yj" eventType="touchUpInside" id="EXy-lm-zJM"/>
-                                                    <segue destination="DHh-tF-9fb" kind="show" id="LpO-Fu-eC5"/>
+                                                    <segue destination="DHh-tF-9fb" kind="push" id="GYQ-ej-tB5"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mcy-RA-Jmx">
@@ -88,9 +88,6 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Home" id="ceH-sL-2mP"/>
-                    <connections>
-                        <segue destination="0pB-yR-ztk" kind="show" identifier="showLoginViewController" id="oJG-sb-ADe"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -110,7 +107,7 @@
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="lu5-6o-hiJ"/>
                         <segue destination="vXC-tO-bfW" kind="relationship" relationship="viewControllers" id="a3F-iu-U8a"/>
                         <segue destination="tUM-ks-KO1" kind="relationship" relationship="viewControllers" id="no5-xK-eBg"/>
-                        <segue destination="xyz-RF-mLw" kind="relationship" relationship="viewControllers" id="xbe-Ra-mwf"/>
+                        <segue destination="ddO-jm-H45" kind="relationship" relationship="viewControllers" id="xbe-Ra-mwf"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3nx-AV-jlR" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -255,21 +252,27 @@
             </objects>
             <point key="canvasLocation" x="1089" y="-403"/>
         </scene>
-        <!--More-->
+        <!--More View Controller-->
         <scene sceneID="4mE-Je-Syd">
             <objects>
-                <viewController id="xyz-RF-mLw" sceneMemberID="viewController">
+                <viewController id="xyz-RF-mLw" customClass="MoreViewController" customModule="StudyApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="2Zm-s9-u1h">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="Hfh-VC-IpG"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="More" id="nej-8a-KeA"/>
+                    <navigationItem key="navigationItem" id="Uar-bG-fCn">
+                        <barButtonItem key="rightBarButtonItem" title="SignOut" id="PBx-TA-Oxj">
+                            <connections>
+                                <action selector="tappedSignOutButton:" destination="xyz-RF-mLw" id="9zG-6J-3c4"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5ta-sk-ZkO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1089" y="1283"/>
+            <point key="canvasLocation" x="2028" y="1282.3088455772115"/>
         </scene>
         <!--Group-->
         <scene sceneID="Am9-ah-BR1">
@@ -350,6 +353,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="kEm-8f-Jlz"/>
                     </view>
+                    <navigationItem key="navigationItem" id="oT7-Nv-CO6"/>
                     <connections>
                         <outlet property="emailTextField" destination="FHr-QA-tgC" id="fLU-2r-nra"/>
                         <outlet property="nameTextField" destination="rL9-Al-lE6" id="RHD-gL-8T4"/>
@@ -378,6 +382,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="blt-X6-tyx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1088.8" y="-2083.8080959520244"/>
+        </scene>
+        <!--More-->
+        <scene sceneID="f1Z-XR-K6l">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ddO-jm-H45" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="More" id="nej-8a-KeA"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="662-xa-iQc">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="xyz-RF-mLw" kind="relationship" relationship="rootViewController" id="3YL-4U-qWU"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="GaE-Jz-aGs" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1088.8" y="1282.3088455772115"/>
         </scene>
     </scenes>
 </document>

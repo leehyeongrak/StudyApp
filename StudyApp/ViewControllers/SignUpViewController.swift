@@ -36,16 +36,20 @@ class SignUpViewController: UIViewController {
                         return
                     }
                     
+                    if let uid = user?.user.uid {
+                        self.registerUserIntoDatabase(uid: uid)
+                    }
+                    
                     self.navigationController?.popViewController(animated: true)
-                    
-                    
-                    
-                    
                 }
             } else {
                 print("Password not correspond")
             }
         }
+    }
+    
+    func registerUserIntoDatabase(uid: String) {
+        
     }
     
     override func viewDidLoad() {

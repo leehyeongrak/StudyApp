@@ -15,11 +15,23 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var passwordTextField: UITextField!
     
     @IBAction func tappedSignUpButton(_ sender: UIButton) {
-        if let emailText = emailTextField.text {
-            print(emailText)
-        }
+        
     }
     @IBAction func tappedSignInButton(_ sender: UIButton) {
+        guard let emailText = emailTextField.text, let passwordText = passwordTextField.text else {
+            return
+        }
+        
+        if emailText == "" || passwordText == "" {
+            print("Invalid input")
+        } else {
+            Auth.auth().signIn(withEmail: emailText, password: passwordText) { (user, error) in
+                if error != nil {
+                    print(error)
+                }
+                self.dismiss(animated: true, completion: nil)
+            }
+        }
     }
     
     override func viewDidLoad() {
