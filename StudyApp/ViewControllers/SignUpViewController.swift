@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import FirebaseDatabase
 
 class SignUpViewController: UIViewController {
 
@@ -19,6 +20,7 @@ class SignUpViewController: UIViewController {
     @IBAction func tappedRegisterButton(_ sender: UIButton) {
         registerUser()
     }
+    
     
     
     func registerUser() {
@@ -36,11 +38,10 @@ class SignUpViewController: UIViewController {
                         return
                     }
                     
+                    let value = ["name": nameText, "email": emailText]
                     if let uid = user?.user.uid {
-                        self.registerUserIntoDatabase(uid: uid)
+                        self.registerUserIntoDatabase(uid: uid, value: value)
                     }
-                    
-                    self.navigationController?.popViewController(animated: true)
                 }
             } else {
                 print("Password not correspond")
@@ -48,8 +49,15 @@ class SignUpViewController: UIViewController {
         }
     }
     
-    func registerUserIntoDatabase(uid: String) {
-        
+    func registerUserIntoDatabase(uid: String, value: [String: Any]) {
+        let ref = Database.database().reference().child("users").child(uid)
+        ref.updateChildValues(value) { (error, ref) in
+            if error != nil {
+                print(error)
+                return
+            }
+            self.navigationController?.popViewController(animated: true)
+        }
     }
     
     override func viewDidLoad() {
