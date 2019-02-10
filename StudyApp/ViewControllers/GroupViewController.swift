@@ -11,13 +11,12 @@ import UIKit
 class GroupViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UICollectionViewDelegate, UICollectionViewDataSource {
 
     let identifier = "groupRecruitPostCell"
-    var storedOffsets = [Int: CGFloat]()
+//    var storedOffsets = [Int: CGFloat]()
     
     @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        tableView.register(GroupRecruitPostCell.self, forCellReuseIdentifier: identifier)
         tableView.delegate = self
         tableView.dataSource = self
         
@@ -82,8 +81,24 @@ class GroupRecruitPostCell: UITableViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var timestampLabel: UILabel!
     @IBOutlet weak var countLabel: UILabel!
+    @IBOutlet weak var bookmarkButton: UIButton!
+    
+    private var isBookmarked: Bool = false {
+        didSet {
+            if isBookmarked {
+                bookmarkButton.backgroundColor = .yellow
+            } else {
+                bookmarkButton.backgroundColor = .white
+            }
+        }
+    }
     
     @IBOutlet weak var hashtagsCollectionView: UICollectionView!
+    
+    @IBAction func TappedBookmarkButton(_ sender: UIButton) {
+        self.isBookmarked = !isBookmarked
+    }
+    
     
     var collectionViewOffset: CGFloat {
         get {
