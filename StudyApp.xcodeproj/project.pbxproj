@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		39323EB22209F51800339BA6 /* GroupRecruitPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39323EB12209F51800339BA6 /* GroupRecruitPost.swift */; };
 		3950C1292202B851000228C4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3950C1282202B851000228C4 /* AppDelegate.swift */; };
 		3950C12B2202B851000228C4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3950C12A2202B851000228C4 /* ViewController.swift */; };
 		3950C12E2202B851000228C4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3950C12C2202B851000228C4 /* Main.storyboard */; };
@@ -22,6 +23,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		39323EB12209F51800339BA6 /* GroupRecruitPost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupRecruitPost.swift; sourceTree = "<group>"; };
 		3950C1252202B851000228C4 /* StudyApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StudyApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3950C1282202B851000228C4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3950C12A2202B851000228C4 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -118,6 +120,7 @@
 			isa = PBXGroup;
 			children = (
 				39AC658D22046482003F06D0 /* User.swift */,
+				39323EB12209F51800339BA6 /* GroupRecruitPost.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -251,6 +254,7 @@
 			files = (
 				3950C1412202D271000228C4 /* LoginViewController.swift in Sources */,
 				3950C13B2202C06C000228C4 /* GroupViewController.swift in Sources */,
+				39323EB22209F51800339BA6 /* GroupRecruitPost.swift in Sources */,
 				3950C12B2202B851000228C4 /* ViewController.swift in Sources */,
 				39AC658C22043F51003F06D0 /* MoreViewController.swift in Sources */,
 				3950C1292202B851000228C4 /* AppDelegate.swift in Sources */,
