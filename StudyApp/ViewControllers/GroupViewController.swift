@@ -7,11 +7,14 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseDatabase
 
 class GroupViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UICollectionViewDelegate, UICollectionViewDataSource {
 
     let identifier = "groupRecruitPostCell"
 //    var storedOffsets = [Int: CGFloat]()
+    var posts: Array<GroupRecruitPost> = []
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -19,19 +22,55 @@ class GroupViewController: UIViewController, UITableViewDelegate, UITableViewDat
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
-        
+        fetchPosts()
         // Do any additional setup after loading the view.
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+    }
+    
+    private func fetchPosts() {
+        
+        let ref = Database.database().reference().child("groupRecruitPosts").observe(.childAdded, with: { (snapshot) in
+            if let dictionary = snapshot.value as? [String: Any] {
+                
+                let post = GroupRecruitPost()
+                
+                post.postTitle = dictionary["title"] as? String
+                post.postContent = dictionary["content"] as? String
+                post.postWriterUID = dictionary["uid"] as? String
+                post.timestamp = dictionary["timestamp"] as? Int
+                post.hashtags = self.parsingHashtags(hashtagsText: dictionary["hashtags"] as? String)
+                post.recruitMaxCount = dictionary["maxCount"] as? Int
+                post.recruitCurrentCount = dictionary["currentCount"] as? Int
+                
+                self.posts.append(post)
+                
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
+            }
+            
+        }, withCancel: nil)
+    }
+    
+    private func parsingHashtags(hashtagsText: String?) -> Array<String> {
+        guard let hashtagsArray = hashtagsText?.components(separatedBy: " ") else { return [] }
+        print(hashtagsArray)
+        
+        return hashtagsArray
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return posts.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as? GroupRecruitPostCell else {
             return UITableViewCell()
         }
-        cell.post = GroupRecruitPost()
+        cell.post = posts[indexPath.row]
         
         return cell
     }
@@ -54,11 +93,15 @@ class GroupViewController: UIViewController, UITableViewDelegate, UITableViewDat
 //    }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        guard let number = posts[collectionView.tag].hashtags?.count else { return 0 }
+        return number
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "hashtagCell", for: indexPath) as? GroupRecruitPostHashtagCell else { return UICollectionViewCell() }
+        if let text = posts[collectionView.tag].hashtags?[indexPath.item] {
+            cell.hashtag = text
+        }
         
         return cell
     }
@@ -69,11 +112,12 @@ class GroupRecruitPostCell: UITableViewCell {
     
     var post: GroupRecruitPost? {
         didSet {
-            self.titleLabel.text = "스터디그룹 모집게시물의 샘플입니다."
-            self.nameLabel.text = "이형락"
-            self.timestampLabel.text = "2019/02/07"
-            self.countLabel.text = "1/5"
-            post?.hashtags = ["iOS", "Swift"]
+            self.titleLabel.text = post?.postTitle
+            self.nameLabel.text = post?.postWriterUID
+            self.timestampLabel.text = String(post?.timestamp as! Int)
+            self.countLabel.text = "(\(post?.recruitCurrentCount)/\(post?.recruitMaxCount))"
+            
+            
         }
     }
     
@@ -126,6 +170,12 @@ class GroupRecruitPostCell: UITableViewCell {
 
 class GroupRecruitPostHashtagCell: UICollectionViewCell {
     
+    var hashtag: String? {
+        didSet {
+            self.hashtagLabel.text = hashtag
+        }
+    }
+    
     @IBOutlet weak var hashtagLabel: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -133,9 +183,8 @@ class GroupRecruitPostHashtagCell: UICollectionViewCell {
         self.backgroundColor = .lightGray
         self.layer.cornerRadius = 10
         self.layer.masksToBounds = true
-        
-        hashtagLabel.textColor = .white
-        hashtagLabel.text = "Tag"
+
+
     }
     
 }

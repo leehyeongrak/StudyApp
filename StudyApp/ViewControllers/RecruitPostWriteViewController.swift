@@ -11,8 +11,6 @@ import Firebase
 import FirebaseDatabase
 
 class RecruitPostWriteViewController: UIViewController {
-
-    var newPost: GroupRecruitPost?
     
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var hashtagsTextField: UITextField!
@@ -28,7 +26,7 @@ class RecruitPostWriteViewController: UIViewController {
         
         let timestamp = Int(NSDate().timeIntervalSince1970)
 
-        let values: [String: Any] = ["uid": user.uid, "title": titleText, "content": contentText, "hashtags": hashtagsText, "timestamp": timestamp]
+        let values: [String: Any] = ["uid": user.uid, "title": titleText, "content": contentText, "hashtags": hashtagsText, "timestamp": timestamp, "maxCount": 5, "currentCount": 1]
         
         let ref = Database.database().reference().child("groupRecruitPosts")
         let childRef = ref.childByAutoId()
