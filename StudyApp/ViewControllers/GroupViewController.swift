@@ -100,7 +100,16 @@ class GroupViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         return cell
     }
-
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let vc = segue.destination as! RecruitPostWriteViewController
+        vc.hidesBottomBarWhenPushed = true
+        
+        let backItem = UIBarButtonItem()
+        backItem.title = ""
+        navigationItem.backBarButtonItem = backItem
+    }
+    
 }
 
 class GroupRecruitPostCell: UITableViewCell {
@@ -193,8 +202,7 @@ class GroupRecruitPostHashtagCell: UICollectionViewCell {
         self.backgroundColor = .lightGray
         self.layer.cornerRadius = 10
         self.layer.masksToBounds = true
-
+        
 
     }
-    
 }
