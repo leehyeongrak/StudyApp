@@ -26,10 +26,6 @@ class GroupViewController: UIViewController, UITableViewDelegate, UITableViewDat
         // Do any additional setup after loading the view.
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
-    }
-    
     private func fetchPosts() {
         
         let ref = Database.database().reference().child("groupRecruitPosts").observe(.childAdded, with: { (snapshot) in
@@ -44,7 +40,6 @@ class GroupViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 post.hashtags = self.parsingHashtags(hashtagsText: dictionary["hashtags"] as? String)
                 post.recruitMaxCount = dictionary["maxCount"] as? Int
                 post.recruitCurrentCount = dictionary["currentCount"] as? Int
-                
                 self.posts.append(post)
                 
                 DispatchQueue.main.async {
@@ -53,11 +48,11 @@ class GroupViewController: UIViewController, UITableViewDelegate, UITableViewDat
             }
             
         }, withCancel: nil)
+        
     }
     
     private func parsingHashtags(hashtagsText: String?) -> Array<String> {
         guard let hashtagsArray = hashtagsText?.components(separatedBy: " ") else { return [] }
-        print(hashtagsArray)
         
         return hashtagsArray
     }
@@ -113,10 +108,25 @@ class GroupRecruitPostCell: UITableViewCell {
     var post: GroupRecruitPost? {
         didSet {
             self.titleLabel.text = post?.postTitle
-            self.nameLabel.text = post?.postWriterUID
-            self.timestampLabel.text = String(post?.timestamp as! Int)
-            self.countLabel.text = "(\(post?.recruitCurrentCount)/\(post?.recruitMaxCount))"
             
+            Database.database().reference().child("users").child((post?.postWriterUID)!).observe(.value) { (snapshot) in
+                if let dictionary = snapshot.value as? [String: Any] {
+                    self.nameLabel.text = dictionary["name"] as? String
+                }
+            }
+            
+            if let seconds = Double(exactly: (post?.timestamp)!) {
+                let timestampDate = NSDate(timeIntervalSince1970: seconds)
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "hh:mm:ss"
+                let date = dateFormatter.string(from: timestampDate as Date)
+                
+                self.timestampLabel.text = date
+            }
+            
+            if let currentCount = post?.recruitCurrentCount, let maxCount = post?.recruitMaxCount {
+                self.countLabel.text = "(\(currentCount)/\(maxCount))"
+            }
             
         }
     }

@@ -10,7 +10,7 @@ import UIKit
 import Firebase
 import FirebaseDatabase
 
-class RecruitPostWriteViewController: UIViewController {
+class RecruitPostWriteViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var hashtagsTextField: UITextField!
@@ -20,7 +20,10 @@ class RecruitPostWriteViewController: UIViewController {
         guard let user = Auth.auth().currentUser, let titleText = titleTextField.text, let hashtagsText = hashtagsTextField.text, let contentText = contentTextField.text else { return }
         
         if titleText == "" || hashtagsText == "" || contentText == "" {
-            print("필드 채울것")
+            let alert = UIAlertController(title: "", message: "빈칸을 채워주세요🤗", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+            present(alert, animated: true, completion: nil)
+            
             return
         }
         
@@ -36,15 +39,26 @@ class RecruitPostWriteViewController: UIViewController {
                 print(error)
                 return
             }
-            print("successssssss")
             self.navigationController?.popViewController(animated: true)
         }
     }
     
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        self.view.endEditing(true)
+        return true
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        titleTextField.delegate = self
+        hashtagsTextField.delegate = self
+        contentTextField.delegate = self
     }
     
 
