@@ -20,19 +20,20 @@ class RecruitPostWriteViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var contentTextField: UITextField!
     
     @IBAction func tappedPostButton(_ sender: UIButton) {
-        guard let user = Auth.auth().currentUser, let titleText = titleTextField.text, let hashtagsText = hashtagsTextField.text, let contentText = contentTextField.text else { return }
+        guard let user = Auth.auth().currentUser, let titleText = titleTextField.text, let hashtagsText = hashtagsTextField.text, let contentText = contentTextField.text, let count = countLabel.text else { return }
         
-        if titleText == "" || hashtagsText == "" || contentText == "" {
-            let alert = UIAlertController(title: "", message: "빈칸을 채워주세요🤗", preferredStyle: .alert)
+        if titleText == "" || hashtagsText == "" || contentText == "" || count == "모집정원" {
+            let alert = UIAlertController(title: "", message: "모든 항목을 채워주세요🤗", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
             present(alert, animated: true, completion: nil)
             
             return
         }
         
+        
         let timestamp = Int(NSDate().timeIntervalSince1970)
 
-        let values: [String: Any] = ["uid": user.uid, "title": titleText, "content": contentText, "hashtags": hashtagsText, "timestamp": timestamp, "maxCount": 5, "currentCount": 1]
+        let values: [String: Any] = ["uid": user.uid, "title": titleText, "content": contentText, "hashtags": hashtagsText, "timestamp": timestamp, "maxCount": Int(count), "currentCount": 1]
         
         let ref = Database.database().reference().child("groupRecruitPosts")
         let childRef = ref.childByAutoId()
@@ -51,7 +52,8 @@ class RecruitPostWriteViewController: UIViewController, UITextFieldDelegate {
     }
     
     @objc private func tappedContainerView() {
-        if let pickerViewController = self.storyboard?.instantiateViewController(withIdentifier: "modalPickerViewController") {
+        if let pickerViewController = self.storyboard?.instantiateViewController(withIdentifier: "modalPickerViewController") as? ModalPickerViewController {
+            pickerViewController.delegate = self
             present(pickerViewController, animated: false, completion: nil)
         }        
         
@@ -92,6 +94,8 @@ class RecruitPostWriteViewController: UIViewController, UITextFieldDelegate {
 
 class ModalPickerViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource  {
     
+    var delegate: PassDataDelegate?
+    
     let countNumbers = Array(1...10)
     
     @IBOutlet weak var titleLabel: UILabel!
@@ -103,9 +107,10 @@ class ModalPickerViewController: UIViewController, UIPickerViewDelegate, UIPicke
 
     @IBAction func tappedSelectButton(_ sender: UIButton) {
         let index = pickerView.selectedRow(inComponent: 0)
-        let value = countNumbers[index]
+        let value = String(countNumbers[index])
+        delegate?.passData(data: value)
         
-//        self.dismiss(animated: false, completion: nil)
+        self.dismiss(animated: false, completion: nil)
     }
     
     
@@ -132,10 +137,22 @@ class ModalPickerViewController: UIViewController, UIPickerViewDelegate, UIPicke
     
 }
 
+protocol PassDataDelegate {
+    func passData(data: String)
+}
+
+extension RecruitPostWriteViewController: PassDataDelegate {
+    func passData(data: String) {
+        countLabel.text = data
+    }
+    
+    
+    
+}
+
 extension UITextField {
     open override func awakeFromNib() {
         leftView = UIView(frame: CGRect(x: 0, y: 0, width: 8, height: self.frame.height))
         leftViewMode = .always
     }
 }
-
