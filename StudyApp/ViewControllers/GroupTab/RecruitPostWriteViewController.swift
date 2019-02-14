@@ -33,14 +33,14 @@ class RecruitPostWriteViewController: UIViewController, UITextFieldDelegate {
         
         let timestamp = Int(NSDate().timeIntervalSince1970)
 
-        let values: [String: Any] = ["uid": user.uid, "title": titleText, "content": contentText, "hashtags": hashtagsText, "timestamp": timestamp, "maxCount": Int(count), "currentCount": 1]
+        let values: [String: Any] = ["uid": user.uid, "title": titleText, "content": contentText, "hashtags": hashtagsText, "timestamp": timestamp, "maxCount": Int(count)!, "currentCount": 1]
         
         let ref = Database.database().reference().child("groupRecruitPosts")
         let childRef = ref.childByAutoId()
         
         childRef.updateChildValues(values) { (error, ref) in
             if error != nil {
-                print(error)
+                print(error!)
                 return
             }
             self.navigationController?.popViewController(animated: true)

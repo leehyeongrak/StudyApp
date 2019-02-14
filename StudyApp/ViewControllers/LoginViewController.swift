@@ -27,7 +27,7 @@ class LoginViewController: UIViewController {
         } else {
             Auth.auth().signIn(withEmail: emailText, password: passwordText) { (user, error) in
                 if error != nil {
-                    print(error)
+                    print(error!)
                 }
                 self.dismiss(animated: true, completion: nil)
             }

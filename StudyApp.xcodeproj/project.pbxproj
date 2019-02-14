@@ -17,6 +17,7 @@
 		3950C13B2202C06C000228C4 /* GroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3950C13A2202C06C000228C4 /* GroupViewController.swift */; };
 		3950C13F2202CFBE000228C4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3950C13E2202CFBE000228C4 /* GoogleService-Info.plist */; };
 		3950C1412202D271000228C4 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3950C1402202D271000228C4 /* LoginViewController.swift */; };
+		39A6067F2213F8E700505A71 /* RecruitPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A6067E2213F8E700505A71 /* RecruitPostViewController.swift */; };
 		39AC658C22043F51003F06D0 /* MoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39AC658B22043F51003F06D0 /* MoreViewController.swift */; };
 		39AC658E22046482003F06D0 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39AC658D22046482003F06D0 /* User.swift */; };
 		39D36D0B2202E1D600A17330 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39D36D0A2202E1D600A17330 /* SignUpViewController.swift */; };
@@ -36,6 +37,7 @@
 		3950C13A2202C06C000228C4 /* GroupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupViewController.swift; sourceTree = "<group>"; };
 		3950C13E2202CFBE000228C4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3950C1402202D271000228C4 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		39A6067E2213F8E700505A71 /* RecruitPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecruitPostViewController.swift; sourceTree = "<group>"; };
 		39AC658B22043F51003F06D0 /* MoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreViewController.swift; sourceTree = "<group>"; };
 		39AC658D22046482003F06D0 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		39D36D0A2202E1D600A17330 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
@@ -110,11 +112,10 @@
 			isa = PBXGroup;
 			children = (
 				3950C12A2202B851000228C4 /* ViewController.swift */,
-				3950C13A2202C06C000228C4 /* GroupViewController.swift */,
+				39A606802213F8F100505A71 /* GroupTab */,
 				39AC658B22043F51003F06D0 /* MoreViewController.swift */,
 				39D36D0A2202E1D600A17330 /* SignUpViewController.swift */,
 				3950C1402202D271000228C4 /* LoginViewController.swift */,
-				3901EBFA22108DAF008557A0 /* RecruitPostWriteViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -126,6 +127,16 @@
 				39323EB12209F51800339BA6 /* GroupRecruitPost.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		39A606802213F8F100505A71 /* GroupTab */ = {
+			isa = PBXGroup;
+			children = (
+				3950C13A2202C06C000228C4 /* GroupViewController.swift */,
+				39A6067E2213F8E700505A71 /* RecruitPostViewController.swift */,
+				3901EBFA22108DAF008557A0 /* RecruitPostWriteViewController.swift */,
+			);
+			path = GroupTab;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -258,6 +269,7 @@
 				3950C1412202D271000228C4 /* LoginViewController.swift in Sources */,
 				3950C13B2202C06C000228C4 /* GroupViewController.swift in Sources */,
 				39323EB22209F51800339BA6 /* GroupRecruitPost.swift in Sources */,
+				39A6067F2213F8E700505A71 /* RecruitPostViewController.swift in Sources */,
 				3950C12B2202B851000228C4 /* ViewController.swift in Sources */,
 				39AC658C22043F51003F06D0 /* MoreViewController.swift in Sources */,
 				3950C1292202B851000228C4 /* AppDelegate.swift in Sources */,

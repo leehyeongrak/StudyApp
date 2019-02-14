@@ -28,7 +28,7 @@ class GroupViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     private func fetchPosts() {
         
-        let ref = Database.database().reference().child("groupRecruitPosts").observe(.childAdded, with: { (snapshot) in
+        Database.database().reference().child("groupRecruitPosts").observe(.childAdded, with: { (snapshot) in
             if let dictionary = snapshot.value as? [String: Any] {
                 
                 let post = GroupRecruitPost()
@@ -81,6 +81,7 @@ class GroupViewController: UIViewController, UITableViewDelegate, UITableViewDat
 //        tableViewCell.collectionViewOffset = storedOffsets[indexPath.row] ?? 0
     }
     
+    
 //    func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
 //        guard let tableViewCell = cell as? GroupRecruitPostCell else { return }
 //
@@ -102,9 +103,16 @@ class GroupViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let vc = segue.destination as! RecruitPostWriteViewController
-        vc.hidesBottomBarWhenPushed = true
-        
+        switch segue.identifier {
+        case "writePost":
+            let vc = segue.destination as! RecruitPostWriteViewController
+            vc.hidesBottomBarWhenPushed = true
+        case "showPost":
+            let vc = segue.destination as! RecruitPostViewController
+            vc.hidesBottomBarWhenPushed = true
+        default :
+            return
+        }
         let backItem = UIBarButtonItem()
         backItem.title = ""
         navigationItem.backBarButtonItem = backItem
@@ -145,6 +153,9 @@ class GroupRecruitPostCell: UITableViewCell {
     @IBOutlet weak var timestampLabel: UILabel!
     @IBOutlet weak var countLabel: UILabel!
     @IBOutlet weak var bookmarkButton: UIButton!
+    @IBOutlet weak var profileImageView:  UIImageView!
+    
+    
     
     private var isBookmarked: Bool = false {
         didSet {
@@ -183,8 +194,10 @@ class GroupRecruitPostCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.selectionStyle = .none
+        
+        profileImageView.layer.cornerRadius = 24
+        profileImageView.layer.masksToBounds = true
     }
-    
 }
 
 class GroupRecruitPostHashtagCell: UICollectionViewCell {

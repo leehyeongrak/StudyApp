@@ -34,7 +34,7 @@ class SignUpViewController: UIViewController {
             if passwordText == passwordConfirmText {
                 Auth.auth().createUser(withEmail: emailText, password: passwordText) { (user, error) in
                     if error != nil {
-                        print(error)
+                        print(error!)
                         return
                     }
                     
@@ -53,7 +53,7 @@ class SignUpViewController: UIViewController {
         let ref = Database.database().reference().child("users").child(uid)
         ref.updateChildValues(value) { (error, ref) in
             if error != nil {
-                print(error)
+                print(error!)
                 return
             }
             self.navigationController?.popViewController(animated: true)
