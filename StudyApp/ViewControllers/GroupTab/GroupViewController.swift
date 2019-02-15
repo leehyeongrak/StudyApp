@@ -109,6 +109,12 @@ class GroupViewController: UIViewController, UITableViewDelegate, UITableViewDat
             vc.hidesBottomBarWhenPushed = true
         case "showPost":
             let vc = segue.destination as! RecruitPostViewController
+            if let indexPath = tableView.indexPathForSelectedRow {
+                let index = indexPath.row
+                let selectedPost = posts[index]
+                vc.post = selectedPost
+            }
+            
             vc.hidesBottomBarWhenPushed = true
         default :
             return
@@ -160,9 +166,9 @@ class GroupRecruitPostCell: UITableViewCell {
     private var isBookmarked: Bool = false {
         didSet {
             if isBookmarked {
-                bookmarkButton.backgroundColor = .yellow
+                bookmarkButton.backgroundColor = .orange
             } else {
-                bookmarkButton.backgroundColor = .white
+                bookmarkButton.backgroundColor = .lightGray
             }
         }
     }
@@ -194,10 +200,12 @@ class GroupRecruitPostCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.selectionStyle = .none
-        
-        profileImageView.layer.cornerRadius = 24
+
+        profileImageView.layer.cornerRadius = 20
         profileImageView.layer.masksToBounds = true
+        
     }
+    
 }
 
 class GroupRecruitPostHashtagCell: UICollectionViewCell {
@@ -212,7 +220,6 @@ class GroupRecruitPostHashtagCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        self.backgroundColor = .lightGray
         self.layer.cornerRadius = 10
         self.layer.masksToBounds = true
         
